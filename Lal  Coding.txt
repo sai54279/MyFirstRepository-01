@@ -1,0 +1,280 @@
+:::::::::::::::::::::::::::::::: BankAccountDetails ::::::::::::::::::::
+
+import java.util.Scanner;
+
+class Account
+{
+    private int accountId;
+    private String accountType;
+    private int balance;
+    public int getAccountId()
+    {
+        return accountId;
+        
+    }
+    public String getAccountType()
+    {
+        return accountType;
+    }
+    public int getBalance()
+    {
+        return balance;
+        
+    }
+    public void setAccountId(int id)
+    {
+        this.accountId=id;
+    }
+    public void setAccountType(String st)
+    {
+        this.accountType=st;
+    }
+    public void setBalance(int bal)
+    {
+        this.balance=bal;
+    }
+    public boolean withdraw(int withdraw_amount)
+    {
+        if(getBalance()<withdraw_amount)
+        {
+            System.out.println("Sorry!!!!!!!!! No enough balance");
+            return false;
+        }
+        else
+        {
+            System.out.println("Balance Amount After Withdraw: "+(getBalance()-withdraw_amount));
+            return true;
+        }
+    }
+}
+
+public class AccountApplication 
+{
+    public static Account getAccountDetails()
+    {
+        Account ac=new Account();
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter account id: ");
+        ac.setAccountId(sc.nextInt());
+        sc.nextLine();
+        System.out.println("Enter account type: ");
+        ac.setAccountType(sc.nextLine());
+        int balance;
+        do
+        {
+        System.out.println("Enter Balance");
+        ac.setBalance(sc.nextInt());
+        balance=ac.getBalance();
+        if(balance<=0)
+        System.out.println("Balance should be positive");
+        }
+        while(balance<=0);
+        return ac;
+    }
+    public static int getWithdrawAmount()
+    {
+        Scanner sc=new Scanner(System.in);
+         int wd;
+        do
+        {
+            System.out.println("Enter amount to be withdrawn:");
+            wd=sc.nextInt();
+            if(wd<=0)
+            System.out.println("Amount should be positive");
+        }
+        while(wd<=0);
+        return wd;
+    }
+    public static void main(String[] args)
+    {
+        Account ac=new Account();
+        ac=getAccountDetails();
+        int am = getWithdrawAmount();
+        ac.withdraw(am);
+    }
+}
+
+#########################%%% Counting the Word in the given file %%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+
+
+import java.util.Scanner;
+ 
+public class Test{
+ 
+static int getWordCount(String filename, String word)
+{
+    
+    String a[] = filename.split(" ");
+ 
+    
+    int count = 0;
+    for (int i = 0; i < a.length; i++)
+    {
+    
+    if (word.equals(a[i]))
+        count++;
+    }
+ 
+    return count;
+}
+ 
+public static void main(String args[])
+{
+	Scanner sc= new Scanner(System.in);
+	System.out.println("Enter the .text file");
+        String filename = sc.nextLine();
+        System.out.println("Enter the word");
+        String word = sc.nextLine();
+        System.out.println(getWordCount(filename, word)+ " words.");
+}
+}
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+                      Average and Grade Calculation
+
+
+import java.util.Scanner;
+
+class Student   
+
+{
+    private int id;
+    private String name;
+    private int marks[];
+    private float average;
+    private char grade;
+    public Student(int a,String b,int[] c)
+    {
+        id=a;
+        name=b;
+        marks=c;
+    }
+    public void setId(int Id)
+    {
+        this.id=Id;
+    }
+    public int getId()
+    {
+        return id;
+    }
+    public void setMarks(int[] mark)
+    {
+        this.marks=mark;
+    }
+    public int[] getMarks()
+    {
+        return marks;
+    }
+    public void setName(String nam)
+    {
+        this.name=nam;
+        
+    }
+    public String getName()
+    {
+        return name;
+    }
+    public void setAverage(float sa)
+    {
+        this.average=sa;
+    }
+    public float getAverage()
+    {
+        return average;
+    }
+    public void setGrade(char g)
+    {
+        this.grade=g;
+    }
+    public char getGrade()
+    {
+        return grade;
+    }
+    public void calculateAvg()
+    {
+        float a1=0.0F;
+        for(int a=0;a<this.getMarks().length;a++)
+        {
+            a1=a1+this.marks[a];
+        }
+        this.setAverage(a1/getMarks().length);
+    }
+    public void findGrade()
+    {
+        int min=this.marks[0];
+        for(int i=0;i<this.getMarks().length;i++)
+        {
+            if(this.marks[i]<min) 
+                {
+                    min=this.marks[i];
+                }
+        }
+        if(min<50)
+        {
+            this.setGrade('F');
+        }
+        else if(this.getAverage()>=80 && this.getAverage()<=100)
+        {
+            this.setGrade('O');
+        }
+        else
+        {
+            this.setGrade('A');
+        }
+    }
+}
+
+public class StudentMain 
+{
+    public static void main(String[] args)
+    {
+        Student std=getStudentDetails();
+        std.calculateAvg();
+        std.findGrade();
+        System.out.println("Id:" +std.getId());
+        System.out.println("Name:" +std.getName());
+        System.out.println("Average:"+String.format("%.2f",std.getAverage()));
+        System.out.println("Grade:" +std.getGrade());
+    }
+    public static Student getStudentDetails()
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the id:");
+        int id=Integer.parseInt(sc.nextLine());
+        System.out.println("Enter the name:");
+        String name=sc.nextLine();
+        System.out.println("Enter the no of subjects:");
+        int n=sc.nextInt();
+        if(n<=0)
+        {
+            while(n<=0)
+            {
+                System.out.println("Invalid number of subject");
+                System.out.println("Enter the no of subjects");
+                n=sc.nextInt();
+            }
+        }
+        int arr[]=new int[n];
+        for(int a=0;a<n;a++)
+        {
+            System.out.println("Enter mark for subject "+(a+1)+":");
+            int b=sc.nextInt();
+            if(b<0||b>100)
+            {
+                System.out.println("Invalid Mark");
+                System.out.println("Enter mark for subject "+(a+1)+":");
+                b=sc.nextInt();
+            }
+            arr[a]=b;
+        }
+        Student obj=new Student(id,name,arr);
+        obj.setId(id);
+        obj.setName(name);
+        return obj;
+    }
+}
+
+
+
